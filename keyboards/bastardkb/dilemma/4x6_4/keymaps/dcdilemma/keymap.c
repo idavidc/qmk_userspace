@@ -34,7 +34,7 @@ void matrix_scan_user(void) {
 if (is_alt_tab_active) {
 if (timer_elapsed(alt_tab_timer) > 1000) {
 unregister_code(KC_LALT);
-unregister_code(KC_LSHIFT);
+unregister_code(KC_LSFT);
 is_alt_tab_active = false;
 is_alt_shift_tab_active = false;
 }
