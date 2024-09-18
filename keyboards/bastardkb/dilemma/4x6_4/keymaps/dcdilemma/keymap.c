@@ -24,6 +24,25 @@ enum dilemma_keymap_layers {
     LAYER_POINTER,
 };
 
+// Test
+bool is_alt_tab_active = false;
+bool is_alt_shift_tab_active = false;
+uint16_t alt_tab_timer = 0;
+
+
+void matrix_scan_user(void) {
+if (is_alt_tab_active) {
+if (timer_elapsed(alt_tab_timer) > 1000) {
+unregister_code(KC_LALT);
+unregister_code(KC_LSHIFT);
+is_alt_tab_active = false;
+is_alt_shift_tab_active = false;
+}
+}
+};
+
+//
+
 // Automatically enable sniping-mode on the pointer layer.
 
 #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
@@ -62,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_LBRC,   KC_P7,   KC_UP,   KC_P9, KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_PPLS,   KC_LEFT,   KC_DOWN,   KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -115,12 +134,54 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif // RGB_MATRIX_ENABLE
 
 #ifdef ENCODER_MAP_ENABLE
-// clang-format off
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [LAYER_BASE]       = {ENCODER_CCW_CW(KC_WH_U, KC_WH_D), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [LAYER_LOWER]      = {ENCODER_CCW_CW(KC_UP, KC_DOWN), ENCODER_CCW_CW(KC_LEFT, KC_RGHT)},
-    [LAYER_RAISE]      = {ENCODER_CCW_CW(KC_PGUP, KC_PGDN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [LAYER_POINTER]    = {ENCODER_CCW_CW(RGB_HUD, RGB_HUI), ENCODER_CCW_CW(RGB_SAD, RGB_SAI)},
-};
-// clang-format on
-#endif // ENCODER_MAP_ENABLE
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+  if (index == 0) { // left knob
+    switch (get_highest_layer(layer_state)) {
+      case LAYER_BASE: // Volume
+        if (clockwise) {
+          tap_code(KC_VOLD);
+        } else {
+          tap_code(KC_VOLU);
+        }
+        break;
+      case LAYER_LOWER: // Desktop switching
+        if (clockwise) {
+          tap_code16(C(KC_RIGHT));
+        } else {
+          tap_code16(C(KC_LEFT));
+        }
+        break;
+    }
+  } else if (index == 1) { // right knob
+    switch (get_highest_layer(layer_state)) {
+      case LAYER_LOWER: // Undo / Redo
+        if (clockwise) {
+          tap_code16(LGUI(KC_Z));
+        } else {
+          tap_code16(SGUI(KC_Z));
+        }
+        break;
+      case LAYER_BASE // App switching
+        if (clockwise) {
+            if (!is_alt_tab_active) {
+                is_alt_tab_active = true;
+                unregister_code(KC_LSHIFT);
+                register_code(KC_LALT);
+        }
+        alt_tab_timer = timer_read();
+        tap_code(KC_TAB);
+        } else {
+        if (!is_alt_shift_tab_active) {
+            is_alt_shift_tab_active = true;
+                register_code(KC_LALT);
+                register_code(KC_LSHIFT);
+        }
+        alt_tab_timer = timer_read();
+        tap_code(KC_TAB);
+        break;
+    }
+  }
+    return true;
+}
+#endif
