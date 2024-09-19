@@ -136,7 +136,7 @@ void rgb_matrix_update_pwm_buffers(void);
 #ifdef ENCODER_MAP_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-if (index == 0) { // left knob
+if (index == 0) {// left knob
     switch (get_highest_layer(layer_state)) {
       case LAYER_BASE: // App switching
         if (clockwise) {
@@ -157,18 +157,18 @@ if (index == 0) { // left knob
         tap_code(KC_TAB);
         }
         break;
-    case LAYER_RAISE: // Mouse wheel U/D
+    case LAYER_LOWER: // Mouse wheel U/D
         if (clockwise) {
           tap_code(KC_WH_U);
         } else {
           tap_code(KC_WH_D);
         }
         break;
-      case LAYER_LOWER: // Underglow brightness
+      case LAYER_RAISE: // Underglow brightness
         if (clockwise) {
-          tap_code(KC_NO);
+          tap_code(KC_WH_U);
         } else {
-          tap_code(KC_NO);
+          tap_code(KC_WU_D);
         }
         break;
       default: // No action
