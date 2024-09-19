@@ -136,7 +136,7 @@ void rgb_matrix_update_pwm_buffers(void);
 #ifdef ENCODER_MAP_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 1) { // left knob
+  if (index == 1) { // right knob
     switch (get_highest_layer(layer_state)) {
       case LAYER_BASE: // Volume
         if (clockwise) {
@@ -175,7 +175,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         tap_code(KC_TAB);
         }
         break;
-            case RAISE: // Mouse wheel U/D
+            case LAYER_RAISE: // Mouse wheel U/D
         if (clockwise) {
           tap_code(KC_WH_U);
         } else {
