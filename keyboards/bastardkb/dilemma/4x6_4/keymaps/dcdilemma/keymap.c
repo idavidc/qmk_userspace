@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                          XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,    KC_BTN3, KC_BTN1, KC_BTN2, XXXXXXX
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
-  ),
+  )
 };
 // clang-format on
 
@@ -138,7 +138,7 @@ void rgb_matrix_update_pwm_buffers(void);
 bool encoder_update_user(uint8_t index, bool clockwise) {
 if (index == 0) { // left knob
     switch (get_highest_layer(layer_state)) {
-      case LAYER_BASE // App switching
+      case LAYER_BASE: // App switching
         if (clockwise) {
             if (!is_alt_tab_active) {
                 is_alt_tab_active = true;
