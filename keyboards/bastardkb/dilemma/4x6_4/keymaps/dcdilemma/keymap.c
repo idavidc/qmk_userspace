@@ -136,25 +136,7 @@ void rgb_matrix_update_pwm_buffers(void);
 #ifdef ENCODER_MAP_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 1) { // right knob
-    switch (get_highest_layer(layer_state)) {
-      case LAYER_BASE: // Volume
-        if (clockwise) {
-          tap_code(KC_VOLD);
-        } else {
-          tap_code(KC_VOLU);
-        }
-        break;
-      case LAYER_LOWER: // Desktop switching
-        if (clockwise) {
-          tap_code16(C(KC_RIGHT));
-        } else {
-          tap_code16(C(KC_LEFT));
-        }
-        break;
-    }
-
-  } else if (index == 0) { // left knob
+if (index == 0) { // left knob
     switch (get_highest_layer(layer_state)) {
       case LAYER_BASE // App switching
         if (clockwise) {
@@ -175,7 +157,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         tap_code(KC_TAB);
         }
         break;
-            case LAYER_RAISE: // Mouse wheel U/D
+    case LAYER_RAISE: // Mouse wheel U/D
         if (clockwise) {
           tap_code(KC_WH_U);
         } else {
