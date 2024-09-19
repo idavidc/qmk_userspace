@@ -136,7 +136,7 @@ void rgb_matrix_update_pwm_buffers(void);
 #ifdef ENCODER_MAP_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 0) { // left knob
+  if (index == 1) { // left knob
     switch (get_highest_layer(layer_state)) {
       case LAYER_BASE: // Volume
         if (clockwise) {
@@ -153,15 +153,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
         break;
     }
-  } else if (index == 1) { // right knob
+
+  } else if (index == 0) { // left knob
     switch (get_highest_layer(layer_state)) {
-      case LAYER_LOWER: // Undo / Redo
-        if (clockwise) {
-          tap_code16(LGUI(KC_Z));
-        } else {
-          tap_code16(SGUI(KC_Z));
-        }
-        break;
       case LAYER_BASE // App switching
         if (clockwise) {
             if (!is_alt_tab_active) {
@@ -179,9 +173,31 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
         alt_tab_timer = timer_read();
         tap_code(KC_TAB);
+        }
+        break;
+            case RAISE: // Mouse wheel U/D
+        if (clockwise) {
+          tap_code(KC_WH_U);
+        } else {
+          tap_code(KC_WH_D);
+        }
+        break;
+      case RGBLED: // Underglow brightness
+        if (clockwise) {
+          rgblight_increase_val();
+        } else {
+          rgblight_decrease_val();
+        }
+        break;
+      default: // No action
+        if (clockwise) {
+          tap_code(KC_NO);
+        } else {
+          tap_code(KC_NO);
+        }
         break;
     }
-  }
+    }
     return true;
 }
 #endif
