@@ -160,7 +160,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         if (clockwise) {
             if (!is_alt_tab_active) {
                 is_alt_tab_active = true;
-                unregister_code(KC_LSHIFT);
+                unregister_code(KC_LSFT);
                 register_code(KC_LALT);
         }
         alt_tab_timer = timer_read();
@@ -169,7 +169,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         if (!is_alt_shift_tab_active) {
             is_alt_shift_tab_active = true;
                 register_code(KC_LALT);
-                register_code(KC_LSHIFT);
+                register_code(KC_LSFT);
         }
         alt_tab_timer = timer_read();
         tap_code(KC_TAB);
@@ -182,11 +182,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
           tap_code(KC_WH_D);
         }
         break;
-      case RGBLED: // Underglow brightness
+      case LAYER_LOWER: // Underglow brightness
         if (clockwise) {
-          rgblight_increase_val();
+          tap_code(KC_NO);
         } else {
-          rgblight_decrease_val();
+          tap_code(KC_NO);
         }
         break;
       default: // No action
