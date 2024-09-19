@@ -133,7 +133,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void rgb_matrix_update_pwm_buffers(void);
 #endif // RGB_MATRIX_ENABLE
 
-#ifdef ENCODER_MAP_ENABLE
+//#ifdef ENCODER_MAP_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
 if (index == 0) {// left knob
@@ -182,4 +182,4 @@ if (index == 0) {// left knob
     }
     return true;
 }
-#endif
+//#endif
