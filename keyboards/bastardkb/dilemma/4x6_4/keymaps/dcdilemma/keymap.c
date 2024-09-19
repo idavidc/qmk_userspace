@@ -168,7 +168,7 @@ if (index == 0) {// left knob
         if (clockwise) {
           tap_code(KC_WH_U);
         } else {
-          tap_code(KC_WU_D);
+          tap_code(KC_WH_D);
         }
         break;
       default: // No action
