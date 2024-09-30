@@ -23,3 +23,5 @@
 #define CIRQUE_PINNACLE_TAP_ENABLE
 #define TAPPING_TERM 175
 #define TAPPING_TERM_PER_KEY
+#define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
+#define ONESHOT_TIMEOUT 5000
