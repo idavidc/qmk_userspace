@@ -17,32 +17,34 @@
  */
 #include QMK_KEYBOARD_H
 
-enum dilemma_keymap_layers {
-    LAYER_BASE = 0,
-    LAYER_LOWER,
-    LAYER_RAISE,
-    LAYER_POINTER,
-    LAYER_MAC
-};
+enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_LOWER, LAYER_RAISE, LAYER_POINTER, LAYER_MAC };
 
 // Test
-bool is_alt_tab_active = false;
-bool is_alt_shift_tab_active = false;
-uint16_t alt_tab_timer = 0;
-
+bool     is_alt_tab_active       = false;
+bool     is_alt_shift_tab_active = false;
+uint16_t alt_tab_timer           = 0;
 
 void matrix_scan_user(void) {
-if (is_alt_tab_active) {
-if (timer_elapsed(alt_tab_timer) > 1000) {
-unregister_code(KC_LALT);
-unregister_code(KC_LSFT);
-is_alt_tab_active = false;
-is_alt_shift_tab_active = false;
-}
-}
+    if (is_alt_tab_active) {
+        if (timer_elapsed(alt_tab_timer) > 1000) {
+            unregister_code(KC_LALT);
+            unregister_code(KC_LSFT);
+            is_alt_tab_active       = false;
+            is_alt_shift_tab_active = false;
+        }
+    }
 };
 
-//
+// Tap Dance
+enum {
+    TD_CTL_GUI,
+};
+
+// Tap Dance definitions
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
+};
 
 // Automatically enable sniping-mode on the pointer layer.
 
@@ -134,53 +136,53 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 void rgb_matrix_update_pwm_buffers(void);
 #endif // RGB_MATRIX_ENABLE
 
-//#ifdef ENCODER_MAP_ENABLE
+// #ifdef ENCODER_MAP_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
-if (index == 0) {// left knob
-    switch (get_highest_layer(layer_state)) {
-      case LAYER_BASE: // App switching
-        if (clockwise) {
-            if (!is_alt_tab_active) {
-                is_alt_tab_active = true;
-                unregister_code(KC_LSFT);
-                register_code(KC_LALT);
+    if (index == 0) { // left knob
+        switch (get_highest_layer(layer_state)) {
+            case LAYER_BASE: // App switching
+                if (clockwise) {
+                    if (!is_alt_tab_active) {
+                        is_alt_tab_active = true;
+                        unregister_code(KC_LSFT);
+                        register_code(KC_LALT);
+                    }
+                    alt_tab_timer = timer_read();
+                    tap_code(KC_TAB);
+                } else {
+                    if (!is_alt_shift_tab_active) {
+                        is_alt_shift_tab_active = true;
+                        register_code(KC_LALT);
+                        register_code(KC_LSFT);
+                    }
+                    alt_tab_timer = timer_read();
+                    tap_code(KC_TAB);
+                }
+                break;
+            case LAYER_LOWER: // Mouse wheel U/D
+                if (clockwise) {
+                    tap_code(KC_WH_U);
+                } else {
+                    tap_code(KC_WH_D);
+                }
+                break;
+            case LAYER_RAISE: // Underglow brightness
+                if (clockwise) {
+                    tap_code(KC_WH_U);
+                } else {
+                    tap_code(KC_WH_D);
+                }
+                break;
+            default: // No action
+                if (clockwise) {
+                    tap_code(KC_NO);
+                } else {
+                    tap_code(KC_NO);
+                }
+                break;
         }
-        alt_tab_timer = timer_read();
-        tap_code(KC_TAB);
-        } else {
-        if (!is_alt_shift_tab_active) {
-            is_alt_shift_tab_active = true;
-                register_code(KC_LALT);
-                register_code(KC_LSFT);
-        }
-        alt_tab_timer = timer_read();
-        tap_code(KC_TAB);
-        }
-        break;
-    case LAYER_LOWER: // Mouse wheel U/D
-        if (clockwise) {
-          tap_code(KC_WH_U);
-        } else {
-          tap_code(KC_WH_D);
-        }
-        break;
-      case LAYER_RAISE: // Underglow brightness
-        if (clockwise) {
-          tap_code(KC_WH_U);
-        } else {
-          tap_code(KC_WH_D);
-        }
-        break;
-      default: // No action
-        if (clockwise) {
-          tap_code(KC_NO);
-        } else {
-          tap_code(KC_NO);
-        }
-        break;
-    }
     }
     return true;
 }
-//#endif
+// #endif
