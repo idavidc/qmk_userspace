@@ -98,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                         XXXXXXX, OS_ON, TD_CTL_GUI, _______,    QK_MAGIC_SWAP_LCTL_LGUI, MO(LAYER_CH), QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
+                         XXXXXXX, OS_ON, TD_CTL_GUI, _______,    QK_MAGIC_SWAP_LCTL_LGUI, MO(LAYER_CM), QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
