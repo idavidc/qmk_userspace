@@ -66,8 +66,8 @@ typedef struct {
 
 // Tap dance enums
 enum {
-    X_CTL,
-    SOME_OTHER_DANCE
+    TD_CTL_GUI,
+    X_CTL
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -75,13 +75,6 @@ td_state_t cur_dance(tap_dance_state_t *state);
 // For the x tap dance. Put it here so it can be used in any keymap
 void x_finished(tap_dance_state_t *state, void *user_data);
 void x_reset(tap_dance_state_t *state, void *user_data);
-
-
-
-enum {
-    TD_CTL_GUI,
-    X_CTL
-};
 
 // Automatically enable sniping-mode on the pointer layer.
 
