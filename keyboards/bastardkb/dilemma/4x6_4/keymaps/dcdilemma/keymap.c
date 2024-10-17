@@ -281,7 +281,7 @@ void x_finished(tap_dance_state_t *state, void *user_data) {
 void x_reset(tap_dance_state_t *state, void *user_data) {
     switch (xtap_state.state) {
         case TD_SINGLE_TAP: unregister_code(KC_X); break;
-        case TD_SINGLE_HOLD: unregister_code(RCTL(KC_HOME)); break;
+        case TD_SINGLE_HOLD: unregister_code16(RCTL(KC_HOME)); break;
         case TD_DOUBLE_TAP: unregister_code(KC_ESC); break;
         case TD_DOUBLE_HOLD: unregister_code(KC_LALT); break;
         case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_X); break;
