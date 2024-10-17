@@ -25,9 +25,6 @@ bool     is_alt_shift_tab_active = false;
 uint16_t alt_tab_timer           = 0;
 
 
-define KC_CAD	RCTL(KC_HOME))
-
-
 void matrix_scan_user(void) {
     if (is_alt_tab_active) {
         if (timer_elapsed(alt_tab_timer) > 1000) {
