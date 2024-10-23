@@ -17,7 +17,7 @@
  */
 #include QMK_KEYBOARD_H
 
-enum dilemma_keymap_layers { LAYER_CM = 0, LAYER_BASE, LAYER_LOWER, LAYER_RAISE, LAYER_POINTER };
+enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_CM, LAYER_LOWER, LAYER_RAISE, LAYER_POINTER };
 
 // Test
 bool     is_alt_tab_active       = false;
@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, KC_HOME, XXXXXXX, KC_END, XXXXXXX, XXXXXXX,    KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_LGUI, TD(X_CTL), KC_LCTL, KC_LSFT, XXXXXXX,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, KC_HOME, TD(X_CTL), KC_END, KC_LSFT, XXXXXXX,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -295,5 +295,5 @@ void x_reset(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
-    [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
+    [TD_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
 };
