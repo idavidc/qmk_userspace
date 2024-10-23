@@ -17,7 +17,7 @@
  */
 #include QMK_KEYBOARD_H
 
-enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_CM, LAYER_LOWER, LAYER_RAISE, LAYER_POINTER };
+enum dilemma_keymap_layers { LAYER_CM = 0, LAYER_BASE, LAYER_LOWER, LAYER_RAISE, LAYER_POINTER };
 
 // Test
 bool     is_alt_tab_active       = false;
@@ -68,7 +68,8 @@ typedef struct {
 // Tap dance enums
 enum {
     TD_CTL_GUI,
-    X_CTL
+    X_CTL,
+    TD_HOMEZ
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
