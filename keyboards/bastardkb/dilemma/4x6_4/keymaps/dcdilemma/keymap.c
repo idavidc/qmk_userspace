@@ -313,5 +313,5 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
     //print("Running post_process_record_user.\n");
     dprintf("post_process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
-  #endif;
+  #endif
 }
