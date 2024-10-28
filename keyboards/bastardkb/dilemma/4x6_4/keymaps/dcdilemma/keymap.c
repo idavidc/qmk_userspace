@@ -303,7 +303,7 @@ tap_dance_action_t tap_dance_actions[] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
-    //uprintf("%s keycode\n", keycode);
+    dprintf("%s keycode\n", keycode);
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
   return true;
