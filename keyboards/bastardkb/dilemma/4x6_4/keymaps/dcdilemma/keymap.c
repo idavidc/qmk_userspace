@@ -299,6 +299,18 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
 };
 
+// Dynamic TD Handling
+
+void press_unpress(bool pressed, int code1, int code2) {
+  if(pressed) {
+    register_code(code1);
+    register_code(code2);
+  } else {
+    unregister_code(code2);
+    unregister_code(code1);
+  }
+}
+
 // Debugging
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
