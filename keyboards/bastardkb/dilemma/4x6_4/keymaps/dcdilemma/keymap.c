@@ -342,6 +342,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //dprintf("%s keycode\n", keycode);
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
+  return true;
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
