@@ -321,8 +321,8 @@ tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
     [TD_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
-    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, (test_user_data_t)(KC_A)),
-    [TD_TEST_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, (test_user_data_t)(KC_B)),
+    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, (test_user_data_t*)(KC_A)),
+    [TD_TEST_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, (test_user_data_t*)(KC_B)),
 };
 
 
