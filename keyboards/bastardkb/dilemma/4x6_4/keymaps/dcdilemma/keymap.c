@@ -306,7 +306,7 @@ typedef struct {
     uint16_t keycode;
 } test_user_data_t;
 
-void test_fin(qk_tap_dance_state_t *state, void *user_data) {
+void test_fin(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
     switch (state->count) {
         case 1:
