@@ -69,7 +69,9 @@ typedef struct {
 enum {
     TD_CTL_GUI,
     X_CTL,
-    TD_HOMEZ
+    TD_HOMEZ,
+    TD_TEST_1,
+    TD_TEST_2
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
