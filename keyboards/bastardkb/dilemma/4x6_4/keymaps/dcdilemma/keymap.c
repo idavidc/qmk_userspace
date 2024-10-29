@@ -293,6 +293,10 @@ void x_reset(tap_dance_state_t *state, void *user_data) {
     xtap_state.state = TD_NONE;
 }
 
+typedef struct {
+    uint16_t keycode;
+} test_user_data_t;
+
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
@@ -304,9 +308,7 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // Dynamic TD Handling
 
-typedef struct {
-    uint16_t keycode;
-} test_user_data_t;
+
 
 void test_fin(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
