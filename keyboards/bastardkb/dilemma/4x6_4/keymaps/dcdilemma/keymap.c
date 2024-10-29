@@ -302,6 +302,24 @@ tap_dance_action_t tap_dance_actions[] = {
 
 // Dynamic TD Handling
 
+typedef struct {
+    uint16_t keycode;
+} test_user_data_t;
+
+void test_fin(qk_tap_dance_state_t *state, void *user_data) {
+    uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
+    switch (state->count) {
+        case 1:
+            tap_code16(keycode);
+            break;
+        case 2:
+            for (uint8_t i=0; i<10; i++) {
+                tap_code16(keycode);
+            }
+            break;
+    }
+};
+
 #define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data) \
         { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void*)user_user_data, }
 
@@ -315,18 +333,13 @@ void press_unpress(bool pressed, int code1, int code2) {
   }
 }
 
-// Debugging
+// End of Tap Dance Dynamic Function testing
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
     //dprintf("%s keycode\n", keycode);
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
-  switch (keycode) {
-    case KC_TRNS:
-    case TD_ENDZ:
-
-  return true;
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
