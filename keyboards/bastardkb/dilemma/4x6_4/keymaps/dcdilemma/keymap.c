@@ -264,7 +264,6 @@ static td_tap_t xtap_state = {
 
 //
 
-
 void x_finished(tap_dance_state_t *state, void *user_data) {
     xtap_state.state = cur_dance(state);
     switch (xtap_state.state) {
@@ -296,10 +295,15 @@ void x_reset(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
-    [TD_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
+    [TD_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
+    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, &((test_user_data_t){KC_1})),
+    [TD_TEST_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, &((test_user_data_t){KC_2})),
 };
 
 // Dynamic TD Handling
+
+#define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data) \
+        { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void*)user_user_data, }
 
 void press_unpress(bool pressed, int code1, int code2) {
   if(pressed) {
@@ -318,6 +322,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //dprintf("%s keycode\n", keycode);
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
+  switch (keycode) {
+    case KC_TRNS:
+    case TD_ENDZ:
+
   return true;
 }
 
