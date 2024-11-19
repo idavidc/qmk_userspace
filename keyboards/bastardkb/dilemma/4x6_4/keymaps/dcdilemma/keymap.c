@@ -46,8 +46,7 @@ void keyboard_post_init_user(void) {
   //debug_mouse=true;
 }
 
-// Tap Dance
-
+// Tap Dance Action types
 typedef enum {
     TD_NONE,
     TD_UNKNOWN,
@@ -65,7 +64,7 @@ typedef struct {
     td_state_t state;
 } td_tap_t;
 
-// Tap dance enums TD-Stop=0
+// Tap dance enums TD-Stop=1
 enum {
     TD_CTL_GUI,
     X_CTL,
@@ -74,9 +73,10 @@ enum {
     TD_TEST_2
 };
 
+// These are prototype functions.
 td_state_t cur_dance(tap_dance_state_t *state);
 
-// For the x tap dance. Put it here so it can be used in any keymap
+// For the x tap dance. Put it here so it can be used in any keymap.  These are prototype functions.
 void x_finished(tap_dance_state_t *state, void *user_data);
 void x_reset(tap_dance_state_t *state, void *user_data);
 
@@ -177,7 +177,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 #    endif // DILEMMA_AUTO_SNIPING_ON_LAYER
-#endif     // POINTING_DEVICE_ENABLEE
+#endif     // POINTING_DEVICE_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
