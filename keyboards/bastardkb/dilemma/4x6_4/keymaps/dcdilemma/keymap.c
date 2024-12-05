@@ -266,7 +266,7 @@ static td_tap_t xtap_state = {
 void x_finished(tap_dance_state_t *state, void *user_data) {
     xtap_state.state = cur_dance(state);
     switch (xtap_state.state) {
-        case TD_SINGLE_TAP: register_code(KC_HOME); break;
+        case TD_SINGLE_TAP: register_code16(KC_HOME); break;
         case TD_SINGLE_HOLD: register_code16(RCTL(KC_HOME)); break;
         case TD_DOUBLE_TAP: register_code(KC_B); break;
         case TD_DOUBLE_HOLD: register_code(KC_C); break;
@@ -280,7 +280,7 @@ void x_finished(tap_dance_state_t *state, void *user_data) {
 
 void x_reset(tap_dance_state_t *state, void *user_data) {
     switch (xtap_state.state) {
-        case TD_SINGLE_TAP: unregister_code(KC_HOME); break;
+        case TD_SINGLE_TAP: unregister_code16(KC_HOME); break;
         case TD_SINGLE_HOLD: unregister_code16(RCTL(KC_HOME)); break;
         case TD_DOUBLE_TAP: unregister_code(KC_B); break;
         case TD_DOUBLE_HOLD: unregister_code(KC_C); break;
