@@ -296,3 +296,30 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset)
 };
+
+void press_unpress(bool pressed, int code1, int code2) {
+  if(pressed) {
+    register_code(code1);
+    register_code(code2);
+  } else {
+    unregister_code(code2);
+    unregister_code(code1);
+  }
+}
+
+// End of Tap Dance Dynamic Function testing
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  #ifdef CONSOLE_ENABLE
+    //dprintf("%s keycode\n", keycode);
+    dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
+  #endif
+  return true;
+}
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+  #ifdef CONSOLE_ENABLE
+    //print("Running post_process_record_user.\n");
+    dprintf("post_process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
+  #endif
+}
