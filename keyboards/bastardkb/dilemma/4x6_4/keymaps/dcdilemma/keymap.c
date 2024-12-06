@@ -45,7 +45,7 @@ void keyboard_post_init_user(void) {
   //debug_mouse=true;
 }
 
-// Tap Dance
+// Tap Dance Type Enums
 
 typedef enum {
     TD_NONE,
