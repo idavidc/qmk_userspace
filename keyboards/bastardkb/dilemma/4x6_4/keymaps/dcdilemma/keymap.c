@@ -299,11 +299,11 @@ tap_dance_action_t tap_dance_actions[] = {
 
 void press_unpress(bool pressed, int code1, int code2) {
   if(pressed) {
-    register_code(code1);
-    register_code(code2);
+    register_code16(code1);
+    register_code16(code2);
   } else {
-    unregister_code(code2);
-    unregister_code(code1);
+    unregister_code16(code2);
+    unregister_code16(code1);
   }
 }
 
