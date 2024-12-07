@@ -67,7 +67,9 @@ typedef struct {
 // Tap dance enums
 enum {
     TD_CTL_GUI,
-    X_CTL
+    X_CTL,
+    TD_TEST_1,
+    TD_TEST_2
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -286,6 +288,25 @@ void x_reset(tap_dance_state_t *state, void *user_data) {
     }
     xtap_state.state = TD_NONE;
 }
+
+void test_fin(tap_dance_state_t *state, void *user_data) {
+    uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
+    switch (state->count) {
+        case 1:
+            tap_code16(keycode);
+            break;
+        case 2:
+            for (uint8_t i=0; i<10; i++) {
+                tap_code16(keycode);
+            }
+            break;
+    }
+};
+
+// Dynamic TD Function
+#define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data) \
+        { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void*)user_user_data, }
+// End dynamic TD Function
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
