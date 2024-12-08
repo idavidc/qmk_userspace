@@ -289,6 +289,10 @@ void x_reset(tap_dance_state_t *state, void *user_data) {
     xtap_state.state = TD_NONE;
 }
 
+typedef struct {
+    uint16_t keycode;
+} test_user_data_t;
+
 void test_fin(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
     switch (state->count) {
@@ -325,7 +329,7 @@ void press_unpress(bool pressed, int code1, int code2) {
     unregister_code16(code2);
     unregister_code16(code1);
   }
-}
+};
 
 // End of Tap Dance Dynamic Function testing
 
