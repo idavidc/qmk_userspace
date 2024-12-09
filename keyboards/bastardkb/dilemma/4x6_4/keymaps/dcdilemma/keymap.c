@@ -297,11 +297,12 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
     switch (state->count) {
         case 1:
-            tap_code16(keycode);
+            dprintf("process within test_fin : %d\n", keycode);
+            tap_code16(keycode);break;
             break;
         case 2:
             for (uint8_t i=0; i<10; i++) {
-                tap_code16(keycode);
+                tap_code16(keycode);break;
             }
             break;
     }
