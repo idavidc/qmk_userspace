@@ -293,7 +293,7 @@ typedef struct {
     uint16_t keycode;
 } test_user_data_t;
 
-void test_fin(tap_dance_state_t *state, void *user_data, uint16_t keycode) {
+void test_fin(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
     switch (state->count) {
         case 1:
@@ -308,8 +308,8 @@ void test_fin(tap_dance_state_t *state, void *user_data, uint16_t keycode) {
 };
 
 // Dynamic TD Function
-#define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data) \
-        { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data =  (void *)&((td_tap_t){kc}), }
+#define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, usr_data) \
+        { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data =  (void *)&(usr_data)}, }
 // End dynamic TD Function
 
 // Tap Dance definitions
