@@ -187,7 +187,7 @@ void rgb_matrix_update_pwm_buffers(void);
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { // left knob
         switch (get_highest_layer(layer_state)) {
-            case LAYER_CM: // App switching
+            case LAYER_BASE: // App switching
                 if (clockwise) {
                     if (!is_alt_tab_active) {
                         is_alt_tab_active = true;
@@ -308,9 +308,16 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
     }
 };
 
+
+
+#define ACTION_TAP_DANCE_DBL(kc1, kc2) \
+    { .fn = {tap_dance_pair_on_each_tap, tap_dance_pair_finished, tap_dance_pair_reset, NULL}, .user_data = (void *)&((tap_dance_pair_t){kc1, kc2}), }
+
+
+
 // Dynamic TD Function
-#define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data) \
-        { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void*)user_user_data, }
+#define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, kc1) \
+    { .fn = {user_fn_on_each_tap}, .user_data = (void *)&((test_user_data_t){kc1}), }
 // End dynamic TD Function
 
 // Tap Dance definitions
@@ -318,8 +325,9 @@ tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
-    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, (test_user_data_t*)(KC_A)),
-    [TD_TEST_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER(NULL, test_fin, NULL, (test_user_data_t*)(KC_B))
+    [TD_TEST_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
+    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_B),
+
 };
 
 void press_unpress(bool pressed, int code1, int code2) {
