@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        OSM(MOD_RSFT), MT(MOD_RGUI, KC_A),    KC_S,    KC_D,    KC_F,       KC_G,   KC_H,  KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
+       OSM(MOD_LCTL),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
   // ╰─────────────────9─────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                          KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC,  MO(LAYER_LOWER),   RAISE,  KC_ENT, KC_DEL,  KC_MUTE
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
@@ -309,11 +309,9 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
 };
 
 
-
+// Example of passing and receiving keycode
 #define ACTION_TAP_DANCE_DBL(kc1, kc2) \
     { .fn = {tap_dance_pair_on_each_tap, tap_dance_pair_finished, tap_dance_pair_reset, NULL}, .user_data = (void *)&((tap_dance_pair_t){kc1, kc2}), }
-
-
 
 // Dynamic TD Function
 #define ACTION_TAP_DANCE_FN_ADVANCED_USER(user_fn_on_each_tap, kc1) \
@@ -326,7 +324,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
     [TD_TEST_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
-    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_B),
+    [TD_TEST_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME),
 
 };
 
