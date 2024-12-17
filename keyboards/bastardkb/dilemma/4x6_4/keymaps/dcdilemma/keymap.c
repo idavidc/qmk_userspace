@@ -68,10 +68,11 @@ typedef struct {
 enum {
     TD_CTL_GUI,
     X_CTL,
-    TD_TEST_1,
-    TD_TEST_2,
-    TD_1_2,
-    TD_TEST_3
+    TD_DOUBLE_1,
+    TD_DBL_1,
+    TD_DOUBLE_2,
+    TD_ADV_1,
+    TD_HOMEZ
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -132,9 +133,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, KC_Z, KC_Z, KC_A, KC_Q, KC_M,    KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_F, TD(TD_TEST_3), TD(TD_1_2), KC_LSFT, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, KC_F, TD(TD_ADV_1), TD(TD_DOUBLE_2), KC_LSFT, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-      RGB_RMOD, XXXXXXX, TD(TD_TEST_1), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      RGB_RMOD, XXXXXXX, TD(TD_DBL_1), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                   XXXXXXX, DF(LAYER_CM), TD(TD_CTL_GUI), _______,    QK_MAGIC_SWAP_LCTL_LGUI, _______, QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
@@ -355,7 +356,6 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
     }
 };
 
-
 // Example of passing and receiving keycode
 #define ACTION_TAP_DANCE_DBL(kc1, kc2) \
     { .fn = {tap_dance_pair_on_each_tap, tap_dance_pair_finished, tap_dance_pair_reset, NULL}, .user_data = (void *)&((tap_dance_pair_t){kc1, kc2}), }
@@ -369,11 +369,12 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
     [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(QK_MAGIC_SWAP_LCTL_LGUI, QK_MAGIC_UNSWAP_LCTL_LGUI),
-    [TD_1_2] = ACTION_TAP_DANCE_DOUBLE(KC_A, KC_B),
+    [TD_DOUBLE_1] = ACTION_TAP_DANCE_DOUBLE(KC_A, KC_B),
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
-    [TD_TEST_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
-    [TD_TEST_3] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
-    [TD_TEST_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME),
+    [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
+    [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
+    [TD_ADV_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME)
+    //[TD_HOMEZ] = ACTION_TAP_DANCE_FN_Y_FINISHED(z)
 
 };
 
