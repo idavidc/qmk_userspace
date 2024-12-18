@@ -376,7 +376,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
     [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME),
-    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_ENDZ)
+    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_END)
 
 };
 
