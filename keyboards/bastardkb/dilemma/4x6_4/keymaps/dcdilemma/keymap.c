@@ -345,12 +345,13 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
     switch (state->count) {
         case 1:
-            dprintf("process within test_fin : %d\n", keycode);
-            tap_code16(keycode);break;
+            dprintf("Case 1 - process within test_fin : %d\n", keycode);
+            register_code16(keycode);break;
             break;
         case 2:
+            dprintf("Case 2 - process within test_fin : %d\n", keycode);
             for (uint8_t i=0; i<10; i++) {
-                tap_code16(keycode);break;
+                register_code16(LCTL(keycode));break;
             }
             break;
     }
@@ -373,7 +374,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
-    [TD_ADV_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME)
+    [TD_ADV_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_G)
     //[TD_HOMEZ] = ACTION_TAP_DANCE_FN_Y_FINISHED(z)
 
 };
