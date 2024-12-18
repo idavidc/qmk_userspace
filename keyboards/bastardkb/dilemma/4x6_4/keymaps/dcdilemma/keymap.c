@@ -72,7 +72,7 @@ enum {
     TD_DBL_1,
     TD_DOUBLE_2,
     TD_ADV_1,
-    TD_HOMEZ
+    TD_ADV_HOMEZ
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, KC_Z, KC_Z, KC_A, KC_Q, KC_M,    KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_F, TD(TD_ADV_1), TD(TD_DOUBLE_2), KC_LSFT, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, KC_F, TD(TD_ADV_HOMEZ), TD(TD_DOUBLE_2), KC_LSFT, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, TD(TD_DBL_1), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -351,7 +351,7 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
         case 2:
             dprintf("Case 2 - process within test_fin : %d\n", keycode);
             for (uint8_t i=0; i<10; i++) {
-                register_code16(LCTL(keycode));break;
+                register_code16(RCTL(keycode));break;
             }
             break;
     }
@@ -374,7 +374,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
-    [TD_ADV_1] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_G)
+    [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME)
     //[TD_HOMEZ] = ACTION_TAP_DANCE_FN_Y_FINISHED(z)
 
 };
