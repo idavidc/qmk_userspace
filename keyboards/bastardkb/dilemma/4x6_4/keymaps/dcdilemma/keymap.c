@@ -170,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
- [LAYER_CM] = LAYOUT(
+    [LAYER_CM] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -183,7 +183,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          KC_LALT, MT(MOD_LSFT, KC_BSPC),  KC_SPC,  MO(LAYER_LOWER),      RAISE,  KC_ENT, KC_DEL,  KC_MUTE
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
-  
 };
 // clang-format on
 
@@ -377,7 +376,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
     [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME),
-    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_END)
+    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_ENDZ)
+
 };
 
 void press_unpress(bool pressed, int code1, int code2) {
