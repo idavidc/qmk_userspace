@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, KC_Z, KC_Z, KC_A, KC_Q, KC_M,    KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_F, TD(TD_ADV_HOMEZ), TD(TD_DOUBLE_2), KC_LSFT, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, KC_F, TD(TD_ADV_HOMEZ), KC_Q, TD(TD_ADV_ENDZ), KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, TD(TD_DBL_1), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
