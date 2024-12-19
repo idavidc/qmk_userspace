@@ -384,8 +384,8 @@ void generic_unregister(tap_dance_state_t *state, void *user_data) {
     { .fn = {user_fn_on_each_tap}, .user_data = (void *)&((test_user_data_t){kc1}), }
 // End dynamic TD Function
 
-#define ACTION_TAP_DANCE_FN_ADVANCED_2(user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data, kc1) \
-        { .fn = {user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data == (void *)&((test_user_data_t){kc1}), }
+#define ACTION_TAP_DANCE_FN_ADVANCED_2(user_fn_on_dance_finished, user_fn_on_dance_reset, kc1) \
+        { .fn = {user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void *)&((test_user_data_t){kc1}), }
 
 
 // Tap Dance definitions
@@ -396,8 +396,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
-    [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(generic_register, generic_unregister, KC_HOME),
-    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(generic_register, generic_unregister, KC_END)
+    [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_2(generic_register, generic_unregister, KC_HOME),
+    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_2(generic_register, generic_unregister, KC_END)
 
 };
 
