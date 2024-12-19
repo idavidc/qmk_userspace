@@ -109,9 +109,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        OSM(MOD_RSFT), MT(MOD_RGUI, KC_A),    KC_S,    KC_D,    KC_F,       KC_G,   KC_H,  KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       OSM(MOD_RCTL),    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
+       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
   // ╰─────────────────9─────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                 KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, LOWER,   RAISE,  KC_ENT, KC_DEL,  KC_MUTE
+                 KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, LOWER,   SYM,  KC_ENT, KC_DEL,  KC_MUTE
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,    QK_BOOT, KC_1,  KC_2, KC_3, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                         XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,    KC_BTN3, KC_BTN1, KC_BTN2, XXXXXXX
+                         XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,    _______, KC_BTN1, KC_BTN2, XXXXXXX
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
@@ -343,7 +343,23 @@ typedef struct {
     uint16_t keycode;
 } test_user_data_t;
 
-void test_fin(tap_dance_state_t *state, void *user_data) {
+void generic_register(tap_dance_state_t *state, void *user_data) {
+    uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
+    switch (state->count) {
+        case 1:
+            dprintf("Case 1 - process within test_fin : %d\n", keycode);
+            register_code16(keycode);break;
+            break;
+        case 2:
+            dprintf("Case 2 - process within test_fin : %d\n", keycode);
+            for (uint8_t i=0; i<10; i++) {
+                register_code16(RCTL(keycode));break;
+            }
+            break;
+    }
+};
+
+void generic_unregister(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
     switch (state->count) {
         case 1:
@@ -368,6 +384,10 @@ void test_fin(tap_dance_state_t *state, void *user_data) {
     { .fn = {user_fn_on_each_tap}, .user_data = (void *)&((test_user_data_t){kc1}), }
 // End dynamic TD Function
 
+#define ACTION_TAP_DANCE_FN_ADVANCED_2(user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data, kc1) \
+        { .fn = {user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data == (void *)&((test_user_data_t){kc1}), }
+
+
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
@@ -376,8 +396,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [X_CTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_finished, x_reset),
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
-    [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_HOME),
-    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(test_fin, KC_END)
+    [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(generic_register, generic_unregister, KC_HOME),
+    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER(generic_register, generic_unregister, KC_END)
 
 };
 
