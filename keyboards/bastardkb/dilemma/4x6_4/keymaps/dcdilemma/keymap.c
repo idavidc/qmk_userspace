@@ -73,7 +73,8 @@ enum {
     TD_DOUBLE_2,
     TD_ADV_1,
     TD_ADV_HOMEZ,
-    TD_ADV_ENDZ
+    TD_ADV_ENDZ,
+    TD_ADV_ENDZ_2
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -121,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, KC_Z, KC_Z, KC_A, KC_Q, KC_M,    KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_F, TD(TD_ADV_HOMEZ), KC_Q, TD(TD_ADV_ENDZ), KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, TD(TD_ADV_ENDZ_2), TD(TD_ADV_HOMEZ), KC_Q, TD(TD_ADV_ENDZ), KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, TD(TD_DBL_1), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -353,7 +354,15 @@ void generic_register(tap_dance_state_t *state, void *user_data) {
         case 2:
             dprintf("Case 2 - process within test_fin : %d\n", keycode);
             for (uint8_t i=0; i<10; i++) {
+                dprintf("Case 2 - inside for loop : %d\n", i);
                 register_code16(RCTL(keycode));break;
+            }
+            break;
+        case 3:
+            dprintf("Case 3 - process within test_fin : %d\n", keycode);
+            for (uint8_t i=0; i<10; i++) {
+                dprintf("Case 3 - inside for loop : %d\n", i);
+                register_code16(RCTL(RSFT(keycode)));break;
             }
             break;
     }
@@ -364,12 +373,19 @@ void generic_unregister(tap_dance_state_t *state, void *user_data) {
     switch (state->count) {
         case 1:
             dprintf("Case 1 - process within test_fin : %d\n", keycode);
-            register_code16(keycode);break;
+            unregister_code16(keycode);break;
             break;
         case 2:
             dprintf("Case 2 - process within test_fin : %d\n", keycode);
             for (uint8_t i=0; i<10; i++) {
-                register_code16(RCTL(keycode));break;
+                unregister_code16(RCTL(keycode));break;
+            }
+            break;
+        case 3:
+            dprintf("Case 3 - process within test_fin : %d\n", keycode);
+            for (uint8_t i=0; i<10; i++) {
+                dprintf("Case 3 - inside for loop : %d\n", i);
+                unregister_code16(RCTL(RSFT(keycode)));break;
             }
             break;
     }
@@ -387,7 +403,7 @@ void generic_unregister(tap_dance_state_t *state, void *user_data) {
 #define ACTION_TAP_DANCE_FN_ADVANCED_USER_2(user_fn_on_dance_finished, user_fn_on_dance_reset, kc1) \
         { .fn = {user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void *)&((test_user_data_t){kc1}), }
 
-#define ACTION_TAP_DANCE_FN_ADVANCED_USER_3(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, user_user_data, kc1) \
+#define ACTION_TAP_DANCE_FN_ADVANCED_USER_3(user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset, kc1) \
         { .fn = {user_fn_on_each_tap, user_fn_on_dance_finished, user_fn_on_dance_reset}, .user_data = (void *)&((test_user_data_t){kc1}), }
 
 
@@ -401,7 +417,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_DBL_1] = ACTION_TAP_DANCE_DBL(KC_A, KC_B),
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
     [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_HOME),
-    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END)
+    [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END),
+    [TD_ADV_ENDZ_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, generic_register, generic_unregister, KC_END)
 
 };
 
