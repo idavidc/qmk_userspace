@@ -60,6 +60,14 @@ typedef enum {
 } td_state_t;
 
 typedef struct {
+    uint16_t tap;
+    uint16_t hold;
+    uint16_t held;
+} tap_dance_tap_hold_t;
+
+// End of Tap Dance Enums
+
+typedef struct {
     bool is_press_action;
     td_state_t state;
 } td_tap_t;
@@ -74,7 +82,9 @@ enum {
     TD_ADV_1,
     TD_ADV_HOMEZ,
     TD_ADV_ENDZ,
-    TD_ADV_ENDZ_2
+    TD_ADV_ENDZ_2,
+    TD_MAC_HOME,
+    TD_MAC_END
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -103,31 +113,31 @@ void x_reset(tap_dance_state_t *state, void *user_data);
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
-  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+  // ╭───────────────────────────────────────────────────────────────╮ ╭─────────────────────────────────── ───────────────────────────╮
         KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+  // ├───────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────── ──────────────────┤
         KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       OSM(MOD_RSFT), MT(MOD_RGUI, KC_A),    KC_S,    KC_D,    KC_F,       KC_G,   KC_H,  KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+  // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────── ─────────┤
+       OSM(MOD_RSFT), MT(MOD_RGUI, KC_A),    KC_S,    KC_D,    KC_F,   KC_G,   KC_H,  KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+  // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────── ─────┤
        KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
-  // ╰─────────────────9─────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                 KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, LOWER,   SYM,  KC_ENT, KC_DEL,  KC_MUTE
-  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
+  // ╰─────────────────9─────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────── ─────╯
+                        KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, LOWER,     SYM,  KC_ENT, KC_DEL,  KC_MUTE
+  //                    ╰────────────────────────────────────────────╯ ╰─────────────────────────── ────────────────╯
   ),
 
   [LAYER_LOWER] = LAYOUT(
-  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_MOD, KC_Z, KC_Z, KC_A, KC_Q, KC_M,    KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+  // ╭───────────────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────────────╮
+       KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,             KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
+  // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────┤
+       RGB_MOD, TD(TD_MAC_HOME), KC_Z, TD(TD_MAC_END), KC_Q, KC_M,   KC_LBRC,             RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
+  // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────┤
        RGB_TOG, TD(TD_ADV_ENDZ_2), TD(TD_ADV_HOMEZ), KC_Q, TD(TD_ADV_ENDZ), KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+  // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, TD(TD_DBL_1), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
-  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                  XXXXXXX, DF(LAYER_CM), TD(TD_CTL_GUI), _______,    QK_MAGIC_SWAP_LCTL_LGUI, _______, QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
-  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
+  // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────╯
+                  XXXXXXX, _______, TD(TD_CTL_GUI), _______,    QK_MAGIC_SWAP_LCTL_LGUI, _______, QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
+  //                    ╰────────────────────────────────────────────╯ ╰────────────────────────────────────────────╯
   ),
 
   [LAYER_RAISE] = LAYOUT(
@@ -346,48 +356,58 @@ typedef struct {
 
 void generic_register(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
-    switch (state->count) {
-        case 1:
-            dprintf("Case 1 - process within test_fin : %d\n", keycode);
+    xtap_state.state = cur_dance(state);
+    //switch (state->count) {
+    switch (xtap_state.state) {
+        case TD_SINGLE_TAP:
+            dprintf("Generic register - Case 1 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
+            dprintf("Generic Register - Case 1 - process within test_fin : %d\n", keycode);
             register_code16(keycode);break;
             break;
-        case 2:
-            dprintf("Case 2 - process within test_fin : %d\n", keycode);
+        case TD_DOUBLE_TAP:
+            dprintf("Generic register - Case 2 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
+            dprintf("Generic register - Case 2 - process within test_fin : %d\n", keycode);
             for (uint8_t i=0; i<10; i++) {
                 dprintf("Case 2 - inside for loop : %d\n", i);
-                register_code16(RCTL(keycode));break;
+                //register_code16(RCTL(keycode));break;
+                register_code16(RGUI(keycode));break;
             }
             break;
-        case 3:
-            dprintf("Case 3 - process within test_fin : %d\n", keycode);
-            for (uint8_t i=0; i<10; i++) {
-                dprintf("Case 3 - inside for loop : %d\n", i);
-                register_code16(RCTL(RSFT(keycode)));break;
-            }
-            break;
+        case TD_SINGLE_HOLD:
+            dprintf("Generic Register - Case 3 - process within test_fin : %d\n", keycode);
+            //for (uint8_t i=0; i<10; i++) {
+                //dprintf("Case 3 - inside for loop : %d\n", i);
+                //register_code16((RSFT(keycode)));break;
+                register_code16((RGUI(keycode)));break;
+            //}
+        default:break;
     }
 };
 
 void generic_unregister(tap_dance_state_t *state, void *user_data) {
     uint16_t keycode = ((test_user_data_t*)user_data)->keycode;
-    switch (state->count) {
-        case 1:
-            dprintf("Case 1 - process within test_fin : %d\n", keycode);
-            unregister_code16(keycode);break;
+    xtap_state.state = cur_dance(state);
+    switch (xtap_state.state) {
+        case TD_SINGLE_TAP:
+            dprintf("Generic Unregister - Case 1 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
+            dprintf("Generic Unregister - Case 1 - process within test_fin : %d\n", keycode);
+            unregister_code16(keycode);
             break;
-        case 2:
-            dprintf("Case 2 - process within test_fin : %d\n", keycode);
-            for (uint8_t i=0; i<10; i++) {
-                unregister_code16(RCTL(keycode));break;
-            }
-            break;
-        case 3:
-            dprintf("Case 3 - process within test_fin : %d\n", keycode);
-            for (uint8_t i=0; i<10; i++) {
-                dprintf("Case 3 - inside for loop : %d\n", i);
-                unregister_code16(RCTL(RSFT(keycode)));break;
-            }
-            break;
+        case TD_DOUBLE_TAP:
+            dprintf("Generic Unregister - Case 2 - process within test_fin : %d\n", keycode);
+            //for (uint8_t i=0; i<10; i++) {
+                //unregister_code16(RCTL(keycode));break;
+            unregister_code16(RGUI(keycode));break;
+            //}
+            ///break;
+        case TD_SINGLE_HOLD:
+            dprintf("Generic Unegister - Case 3 - process within test_fin : %d\n", keycode);
+            //for (uint8_t i=0; i<10; i++) {
+                //dprintf("Case 3 - inside for loop : %d\n", i);
+                //unregister_code16(RCTL(RSFT(keycode)));break;
+                unregister_code16(RGUI(RSFT(keycode)));break;
+            //}
+        default:break;
     }
 };
 
@@ -418,7 +438,9 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_DOUBLE_2] = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_Y),
     [TD_ADV_HOMEZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_HOME),
     [TD_ADV_ENDZ] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END),
-    [TD_ADV_ENDZ_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, generic_register, generic_unregister, KC_END)
+    [TD_ADV_ENDZ_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, generic_register, generic_unregister, KC_END),
+    [TD_MAC_HOME] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_HOME),
+    [TD_MAC_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END)
 
 };
 
