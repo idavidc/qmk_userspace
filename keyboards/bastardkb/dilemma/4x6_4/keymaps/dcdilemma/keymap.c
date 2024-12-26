@@ -85,7 +85,8 @@ enum {
     TD_WIN_END,
     TD_WIN_END_2,
     TD_MAC_HOME,
-    TD_MAC_END
+    TD_MAC_END,
+    TD_OS_END
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -131,9 +132,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭───────────────────────────────────────────────────────────────╮ ╭───────────────────────────────────────────────────────────────╮
        KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,             KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────┤
-       RGB_MOD, TD(TD_MAC_HOME), TD(TD_MAC_END), XXXXXXX,  KC_Q, EE_CLR,   KC_LBRC,             RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
+       RGB_MOD, XXXXXXX, TD(TD_MAC_HOME), XXXXXXX, TD(TD_MAC_END), EE_CLR,   KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────┤
-       RGB_TOG, TD(TD_WIN_HOME), TD(TD_WIN_END), XXXXXXX, XXXXXXX,  KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, XXXXXXX, TD(TD_WIN_HOME_2), XXXXXXX, TD(TD_WIN_END_2),  KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────┤
       RGB_RMOD, TD(TD_WIN_HOME_2), TD(TD_WIN_END_2), KC_R, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰───────────────────────────────────────────────────────────────┤ ├───────────────────────────────────────────────────────────────╯
@@ -448,7 +449,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_WIN_HOME_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, generic_register, generic_unregister, KC_HOME),
     [TD_WIN_END_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, generic_register, generic_unregister, KC_END),
     [TD_MAC_HOME] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_HOME),
-    [TD_MAC_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END)
+    [TD_MAC_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END),
+    [TD_OS_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END)
 
 };
 
