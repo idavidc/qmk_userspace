@@ -24,6 +24,7 @@ bool     is_alt_tab_active       = false;
 bool     is_alt_shift_tab_active = false;
 uint16_t alt_tab_timer           = 0;
 
+
 void matrix_scan_user(void) {
     if (is_alt_tab_active) {
         if (timer_elapsed(alt_tab_timer) > 1000) {
@@ -162,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,    S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
+       RGB_TOG, KC_HOME, TD(X_CTL), KC_END, KC_LSFT, XXXXXXX,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,    QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -293,6 +294,7 @@ static td_tap_t xtap_state = {
     .is_press_action = true,
     .state = TD_NONE
 };
+
 
 void x_finished(tap_dance_state_t *state, void *user_data) {
     xtap_state.state = cur_dance(state);
@@ -494,6 +496,7 @@ bool process_detected_host_os_user(os_variant_t detected_os) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
     //dprintf("%s keycode\n", keycode);
+
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
   return true;
