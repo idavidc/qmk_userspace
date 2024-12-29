@@ -466,6 +466,31 @@ void press_unpress(bool pressed, int code1, int code2) {
 
 // End of Tap Dance Dynamic Function testing
 
+// OS Detection
+
+#if defined(OS_DETECTION_ENABLE)
+bool process_detected_host_os_user(os_variant_t detected_os) {
+    if (is_keyboard_master()) {
+
+        switch (detected_os) {
+            case OS_IOS:
+            case OS_MACOS:
+                xprintf("MacOS Detected\n");
+                keymap_config.swap_lctl_lgui = true;
+                break;
+            default:
+                keymap_config.swap_lctl_lgui = false;
+                break;
+        }
+    }
+
+    return true;
+}
+#endif // OS_DETECTION_ENABLE
+
+// End OS Detection
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
     //dprintf("%s keycode\n", keycode);
