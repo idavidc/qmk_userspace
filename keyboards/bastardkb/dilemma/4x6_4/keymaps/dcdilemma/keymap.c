@@ -441,7 +441,7 @@ void mac_generic_register(tap_dance_state_t *state, void *user_data) {
                 //dprintf("Case 2 - inside for loop : %d\n", i);
                 //register_code16(RCTL(keycode));break;
             register_code16(RGUI(keycode));
-                //break;
+            break;
             //}
             break;
         case TD_SINGLE_HOLD:
