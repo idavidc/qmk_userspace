@@ -86,7 +86,8 @@ enum {
     TD_WIN_END_2,
     TD_MAC_HOME,
     TD_MAC_END,
-    TD_OS_END
+    TD_OS_END,
+    TD_Tilde_Backtick
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -171,17 +172,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [LAYER_SYM] = LAYOUT(
-  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, RSFT(KC_1), XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD, XXXXXXX, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_AMPR, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,    KC_DOT, KC_1,  KC_2, KC_3, KC_0, XXXXXXX,
-  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                         XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,    _______, KC_BTN1, KC_BTN2, XXXXXXX
-  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
+  // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+        KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+  // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+       XXXXXXX, RSFT(KC_1), XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,                 KC_EQL, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
+  // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                    KC_DOT, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
+  // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+       XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  TD(TD_Tilde_Backtick),        KC_0, KC_1,  KC_2, KC_3, KC_0, XXXXXXX,
+  // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+                         XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,                     _______, KC_BTN1, KC_BTN2, XXXXXXX
+  //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
   ),
 };
 // clang-format on
@@ -505,8 +506,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_WIN_END_2] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, generic_register, generic_unregister, KC_END),
     [TD_MAC_HOME] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, mac_generic_register, mac_generic_unregister, KC_LEFT),
     [TD_MAC_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_3(NULL, mac_generic_register, mac_generic_unregister, KC_RIGHT),
-    [TD_OS_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END)
-
+    [TD_OS_END] = ACTION_TAP_DANCE_FN_ADVANCED_USER_2(generic_register, generic_unregister, KC_END),
+    [TD_Tilde_Backtick] = ACTION_TAP_DANCE_DOUBLE(KC_GRAVE, KC_TILD),
 };
 
 void press_unpress(bool pressed, int code1, int code2) {
