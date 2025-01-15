@@ -99,6 +99,8 @@ void x_reset(tap_dance_state_t *state, void *user_data);
 // Automatically enable sniping-mode on the pointer layer.
 
 #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
+#define DILEMMA_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+#define DILEMMA_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
 
 #define LOWER MO(LAYER_LOWER)
 #define RAISE MO(LAYER_RAISE)
@@ -135,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
        RGB_MOD, TD(TD_MAC_HOME), XXXXXXX, TD(TD_MAC_END), XXXXXXX, EE_CLR,       KC_LBRC,   RGUI(KC_LEFT),   KC_UP,  RGUI(KC_RIGHT), KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
-       RGB_TOG, TD(TD_WIN_HOME_2), XXXXXXX, TD(TD_WIN_END_2), XXXXXXX, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, XXXXXXX, TD(TD_WIN_HOME_2), XXXXXXX, TD(TD_WIN_END_2), KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────╯
@@ -175,11 +177,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
         KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-       XXXXXXX, RSFT(KC_1), XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD,                 KC_EQL, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
+       XXXXXXX, RSFT(KC_1), XXXXXXX, KC_LBRC, KC_RBRC, S_D_MOD,                 KC_EQL, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                    KC_DOT, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
+       XXXXXXX, KC_LGUI, KC_LALT, KC_LPRN, KC_RPRN, KC_PIPE,                    KC_DOT, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-       XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  TD(TD_Tilde_Backtick),        KC_0, KC_1,  KC_2, KC_3, KC_0, XXXXXXX,
+       XXXXXXX, _______, DRGSCRL, KC_LCBR, KC_RCBR,  TD(TD_Tilde_Backtick),        KC_0, KC_1,  KC_2, KC_3, KC_0, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
                          XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,                     _______, KC_BTN1, KC_BTN2, XXXXXXX
   //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
@@ -360,18 +362,15 @@ void generic_register(tap_dance_state_t *state, void *user_data) {
             //for (uint8_t i=0; i<10; i++) {
                 //dprintf("Case 2 - inside for loop : %d\n", i);
                 //register_code16(RCTL(keycode));break;
-            register_code16(RCTL(keycode));
-                //break;
+            register_code16(RSFT(keycode));break;
             //}
-            break;
         case TD_SINGLE_HOLD:
             dprintf("Generic register - Case 3 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
             dprintf("Generic Register - Case 3 - process within test_fin - Single Hold : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
                 //dprintf("Case 3 - inside for loop : %d\n", i);
                 //register_code16((RSFT(keycode)));break;
-            register_code16(RCTL(RSFT((keycode))));
-            break;
+            register_code16(RSFT(RCTL((keycode))));break;
             //}
         dprintf("Generic register xtap_state.state : %d\n", xtap_state.state);
         default:break;
@@ -385,21 +384,19 @@ void generic_unregister(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP:
             dprintf("Generic Unregister - Case 1 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
             dprintf("Generic Unregister - Case 1 - process within test_fin : %d\n", keycode);
-            unregister_code16(keycode);
-            break;
+            unregister_code16(keycode);break;
         case TD_DOUBLE_TAP:
             dprintf("Generic Unregister - Case 2 - process within test_fin : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
                 //unregister_code16(RCTL(keycode));break;
-            unregister_code16(RCTL(keycode));break;
+            unregister_code16(RSFT(keycode));break;
             //}
-            ///break;
         case TD_SINGLE_HOLD:
             dprintf("Generic Unegister - Case 3 - process within test_fin : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
                 //dprintf("Case 3 - inside for loop : %d\n", i);
                 //unregister_code16(RCTL(RSFT(keycode)));break;
-            unregister_code16(RCTL(RSFT(keycode)));break;
+            unregister_code16(RSFT(RCTL(keycode)));break;
             //}
         default:break;
     }
@@ -419,26 +416,22 @@ void mac_generic_register(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP:
             dprintf("Generic mac_register - Case 1 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
             dprintf("Generic mac_register - Case 1 - process within test_fin : %d\n", keycode);
-            register_code16(keycode);
-            break;
+            register_code16(keycode);break;
         case TD_DOUBLE_TAP:
             dprintf("Generic mac_register - Case 2 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
             dprintf("Generic mac_register - Case 2 - process within test_fin : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
                 //dprintf("Case 2 - inside for loop : %d\n", i);
                 //register_code16(RCTL(keycode));break;
-            register_code16(RGUI(keycode));
-            break;
+            register_code16(RGUI(keycode));break;
             //}
-            break;
         case TD_SINGLE_HOLD:
             dprintf("Generic mac_register - Case 3 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
             dprintf("Generic mac_register - Case 3 - process within test_fin - Single Hold : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
                 //dprintf("Case 3 - inside for loop : %d\n", i);
                 //register_code16((RSFT(keycode)));break;
-            register_code16(RGUI(RSFT((keycode))));
-            break;
+            register_code16(RGUI(RSFT((keycode))));break;
             //}
         dprintf("Generic mac_register xtap_state.state : %d\n", xtap_state.state);
         default:break;
@@ -452,15 +445,13 @@ void mac_generic_unregister(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP:
             dprintf("Generic mac_Unregister - Case 1 - process within test_fin xtap_state.state : %d\n", xtap_state.state);
             dprintf("Generic mac_Unregister - Case 1 - process within test_fin : %d\n", keycode);
-            unregister_code16(keycode);
-            break;
+            unregister_code16(keycode);break;
         case TD_DOUBLE_TAP:
             dprintf("Generic mac_Unregister - Case 2 - process within test_fin : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
                 //unregister_code16(RCTL(keycode));break;
             unregister_code16(RGUI(keycode));break;
             //}
-            ///break;
         case TD_SINGLE_HOLD:
             dprintf("Generic mac_Unegister - Case 3 - process within test_fin : %d\n", keycode);
             //for (uint8_t i=0; i<10; i++) {
