@@ -17,7 +17,7 @@
  */
 #include QMK_KEYBOARD_H
 
-enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_CM, LAYER_LOWER, LAYER_RAISE, LAYER_POINTER, LAYER_SYM };
+enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_CM, LAYER_NAVI, LAYER_RAISE, LAYER_POINTER, LAYER_SYM };
 
 // Test
 bool     is_alt_tab_active       = false;
@@ -103,7 +103,7 @@ void x_reset(tap_dance_state_t *state, void *user_data);
 #define DILEMMA_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #define DILEMMA_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
 
-#define LOWER MO(LAYER_LOWER)
+#define NAVI MO(LAYER_NAVI)
 #define RAISE MO(LAYER_RAISE)
 #define SYM MO(LAYER_SYM)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
@@ -128,11 +128,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────┤
        KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────╯
-                        KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, LOWER,                          SYM,  KC_ENT, KC_DEL,  KC_MUTE
+                        KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, NAVI,                          SYM,  KC_ENT, KC_DEL,  KC_MUTE
   //                    ╰───────────────────────────────────────────────────────────────────╯ ╰──────────────────────────────────────────────────────────────────────╯
   ),
 
-  [LAYER_LOWER] = LAYOUT(
+  [LAYER_NAVI] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
        KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
@@ -228,7 +228,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_TAB);
                 }
                 break;
-            case LAYER_LOWER: // Mouse wheel U/D
+            case LAYER_NAVI: // Mouse wheel U/D
                 if (clockwise) {
                     tap_code(KC_WH_U);
                 } else {
