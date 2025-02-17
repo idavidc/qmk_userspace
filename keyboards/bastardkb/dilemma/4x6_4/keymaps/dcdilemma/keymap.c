@@ -60,6 +60,10 @@ typedef enum {
     TD_TRIPLE_HOLD
 } td_state_t;
 
+enum custom_keycodes {
+    CNALTA = SAFE_RANGE,
+};
+
 typedef struct {
     uint16_t tap;
     uint16_t hold;
@@ -128,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────┤
        KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────╯
-                        KC_LALT, MT(MOD_LSFT, KC_BSPC), KC_SPC, NAVI,                          SYM,  KC_ENT, KC_DEL,  KC_MUTE
+                        LCA(KC_TAB), MT(MOD_LSFT, KC_BSPC), KC_SPC, NAVI,                          SYM,  KC_ENT, KC_DEL,  KC_MUTE
   //                    ╰───────────────────────────────────────────────────────────────────╯ ╰──────────────────────────────────────────────────────────────────────╯
   ),
 
@@ -211,21 +215,22 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         switch (get_highest_layer(layer_state)) {
             case LAYER_BASE: // App switching
                 if (clockwise) {
-                    if (!is_alt_tab_active) {
-                        is_alt_tab_active = true;
-                        unregister_code(KC_LSFT);
-                        register_code(KC_LALT);
-                    }
+                    //if (!is_alt_tab_active) {
+                    //    is_alt_tab_active = true;
+                    //    unregister_code(KC_LSFT);
+                    //    register_code(KC_LALT);
+                    //}
                     alt_tab_timer = timer_read();
                     tap_code(KC_TAB);
                 } else {
-                    if (!is_alt_shift_tab_active) {
-                        is_alt_shift_tab_active = true;
-                        register_code(KC_LALT);
-                        register_code(KC_LSFT);
-                    }
+                    //if (!is_alt_shift_tab_active) {
+                    //    is_alt_shift_tab_active = true;
+                    //    register_code(KC_LALT);
+                    //    register_code(KC_LSFT);
+                    //}
                     alt_tab_timer = timer_read();
-                    tap_code(KC_TAB);
+                    //tap_code(RSFT(KC_TAB));
+                    register_code16(RSFT(KC_TAB));
                 }
                 break;
             case LAYER_NAVI: // Mouse wheel U/D
@@ -547,7 +552,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
   return true;
-}
+};
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
