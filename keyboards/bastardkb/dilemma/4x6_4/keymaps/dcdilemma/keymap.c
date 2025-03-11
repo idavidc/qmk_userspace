@@ -231,8 +231,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     //    register_code(KC_LSFT);
                     //}
                     alt_tab_timer = timer_read();
-                    //tap_code(RSFT(KC_TAB));
-                    register_code16(RSFT(KC_TAB));
+                    tap_code16(RSFT(KC_TAB));
+                    //register_code16(RSFT(KC_TAB));
+                    //SEND_STRING(SS_TAP(RSFT(KC_TAB)));
                 }
                 break;
             case LAYER_NAVI: // Mouse wheel U/D
