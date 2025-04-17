@@ -17,7 +17,7 @@
  */
 #include QMK_KEYBOARD_H
 
-enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_CM, LAYER_NAVI, LAYER_RAISE, LAYER_POINTER, LAYER_SYM };
+enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_NAV, LAYER_POINTER, SYM, FUN, MOUSE};
 
 // Test
 bool     is_alt_tab_active       = false;
@@ -109,9 +109,7 @@ void x_reset(tap_dance_state_t *state, void *user_data);
 #define DILEMMA_MINIMUM_DEFAULT_DPI 1400
 
 
-#define NAVI MO(LAYER_NAVI)
-#define RAISE MO(LAYER_RAISE)
-#define SYM MO(LAYER_SYM)
+#define NAV MO(LAYER_NAV)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
 
@@ -134,11 +132,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────┤
        KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LALT,
   // ╰──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────╯
-                        LCA(KC_TAB), MT(MOD_LSFT, KC_BSPC), KC_SPC, NAVI,                          SYM,  KC_ENT, KC_DEL,  KC_MUTE
+                        LCA(KC_TAB), MT(MOD_LSFT, KC_BSPC), KC_SPC, NAV,                          SYM,  KC_ENT, KC_DEL,  KC_MUTE
   //                    ╰───────────────────────────────────────────────────────────────────╯ ╰──────────────────────────────────────────────────────────────────────╯
   ),
 
-  [LAYER_NAVI] = LAYOUT(
+  [LAYER_NAV] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
        KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
@@ -150,20 +148,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╰──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────╯
                   XXXXXXX, _______, TD(TD_CTL_GUI), _______,                    QK_MAGIC_SWAP_LCTL_LGUI, _______, QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
   //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
-  ),
-
-  [LAYER_RAISE] = LAYOUT(
-  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_MNXT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
-  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_MPRV, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
-  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                         XXXXXXX, _______, _______, XXXXXXX,    _______, XXXXXXX, XXXXXXX, XXXXXXX
-  //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
   [LAYER_POINTER] = LAYOUT(
@@ -180,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ╰───────────────────────────────────╯ ╰───────────────────────────────────╯
   ),
 
-  [LAYER_SYM] = LAYOUT(
+  [SYM] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
         KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
@@ -194,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
   ),
 
-  [LAYER_FUN] = LAYOUT(
+  [FUN] = LAYOUT(
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
           KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
@@ -206,7 +190,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
                            XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,                     _______, KC_BTN1, KC_BTN2, XXXXXXX
     //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
-    )
+    ),
+
+    [MOUSE] = LAYOUT(
+        // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+              KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+        // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+             XXXXXXX, RSFT(KC_1), XXXXXXX, KC_LBRC, KC_RBRC, S_D_MOD,                 XXXXXXX, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
+        // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+             XXXXXXX, KC_LGUI, KC_LALT, KC_LPRN, KC_RPRN, KC_PIPE,                    KC_EQL, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
+        // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+             XXXXXXX, _______, DRGSCRL, KC_LCBR, KC_RCBR,  TD(TD_Tilde_Backtick),        KC_0, KC_1,  KC_2, KC_3, KC_DOT, XXXXXXX,
+        // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
+                               XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,                     _______, KC_BTN1, KC_BTN2, XXXXXXX
+        //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
+        ),
+
 };
 // clang-format on
 
@@ -250,14 +249,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     //SEND_STRING(SS_TAP(RSFT(KC_TAB)));
                 }
                 break;
-            case LAYER_NAVI: // Mouse wheel U/D
+            case LAYER_NAV: // Mouse wheel U/D
                 if (clockwise) {
                     tap_code(KC_WH_U);
                 } else {
                     tap_code(KC_WH_D);
                 }
                 break;
-            case LAYER_RAISE: // Underglow brightness
+            case MOUSE: // Underglow brightness
                 if (clockwise) {
                     tap_code(KC_WH_U);
                 } else {
