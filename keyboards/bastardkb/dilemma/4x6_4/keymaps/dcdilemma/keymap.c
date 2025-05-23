@@ -166,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-        KC_F12,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+       XXXXXXX, XXXXXXX, XXXXXXX,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
        XXXXXXX, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC, S_D_MOD,                 XXXXXXX, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
@@ -180,15 +180,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [FUN] = LAYOUT(
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-          XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+         XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,             XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-         XXXXXXX, XXXXXXX, KC_F7, KC_F8, KC_F9, KC_F12,                 XXXXXXX, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
+         XXXXXXX, KC_f12, KC_F7, KC_F8, KC_F9, KC_PSCR,                              XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-         XXXXXXX, KC_LGUI, KC_F4, KC_F5, KC_F6, KC_F11,                    KC_EQL, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
+         XXXXXXX, KC_F11, KC_F4, KC_F5, KC_F6, KC_SCRL,                              XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-         XXXXXXX, _______, KC_F1, KC_F2, KC_F3,  KC_F10,        KC_0, KC_1,  KC_2, KC_3, KC_DOT, XXXXXXX,
+         XXXXXXX, KC_F10  , KC_F1, KC_F2, KC_F3, KC_PAUS,                            XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-                           XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3,                     _______, KC_BTN1, KC_BTN2, XXXXXXX
+                           XXXXXXX, KC_BTN2, KC_LALT, KC_BTN3,                     _______, KC_BTN1, KC_BTN2, XXXXXXX
     //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
     ),
 
