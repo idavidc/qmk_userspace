@@ -166,9 +166,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-       XXXXXXX, XXXXXXX, XXXXXXX,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-       XXXXXXX, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC, S_D_MOD,                 XXXXXXX, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
+       XXXXXXX, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC, KC_PPLS,                 XXXXXXX, KC_7, KC_8, KC_9, XXXXXXX, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
        XXXXXXX, KC_LGUI, KC_LALT, KC_LPRN, KC_RPRN, KC_PIPE,                    KC_EQL, KC_4, KC_5, KC_6, KC_RGUI, XXXXXXX,
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
          XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,             XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-         XXXXXXX, KC_f12, KC_F7, KC_F8, KC_F9, KC_PSCR,                              XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
+         XXXXXXX, KC_F12, KC_F7, KC_F8, KC_F9, KC_PSCR,                              XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
          XXXXXXX, KC_F11, KC_F4, KC_F5, KC_F6, KC_SCRL,                              XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
