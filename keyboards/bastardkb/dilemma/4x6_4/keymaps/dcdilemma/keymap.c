@@ -575,9 +575,11 @@ bool process_detected_host_os_user(os_variant_t detected_os) {
             case OS_MACOS:
                 xprintf("MacOS Detected\n");
                 keymap_config.swap_lctl_lgui = true;
+                keymap_config.swap_rctl_rgui = true;
                 break;
             default:
                 keymap_config.swap_lctl_lgui = false;
+                keymap_config.swap_rctl_rgui = false;
                 break;
         }
     }
