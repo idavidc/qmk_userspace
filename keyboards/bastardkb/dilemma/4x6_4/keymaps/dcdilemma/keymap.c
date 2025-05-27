@@ -124,7 +124,7 @@ void x_reset(tap_dance_state_t *state, void *user_data);
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────────────────────╮ ╭─────────────────────────────────────────────────────────────────────────────────────────────────╮
-        KC_TILD,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────┤
         XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS,
   // ├──────────────────────────────────────────────────────────────────────────────────────┤ ├─────────────────────────────────────────────────────────────────────────────────────────┤
@@ -138,13 +138,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NAV] = LAYOUT(
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
-       RGB_MOD, TD(TD_MAC_HOME), XXXXXXX, TD(TD_MAC_END), XXXXXXX, EE_CLR,       XXXXXXX,   KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
+       RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,                     XXXXXXX,   KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
-       RGB_TOG, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
+       RGB_TOG, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, KC_P,                       KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
-      RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(LAYER_BASE),             KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────╯
                   XXXXXXX, _______, TD(TD_CTL_GUI), _______,                    QK_MAGIC_SWAP_LCTL_LGUI, _______, QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
   //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
