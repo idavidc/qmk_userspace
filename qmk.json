@@ -1,7 +1,6 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["bastardkb/dilemma/4x6_4", "dcdilemma"],
-        ["bastardkb/dilemma/4x6_4", "colemak"]
+        ["bastardkb/dilemma/4x6_4", "dcdilemma"]
     ]
 }
