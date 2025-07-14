@@ -184,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
          XXXXXXX, KC_F12, KC_F7, KC_F8, KC_F9, KC_PSCR,                             XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
-         XXXXXXX, KC_F11, KC_F4, KC_F5, KC_F6, KC_SCRL,                             XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
+         XXXXXXX, KC_F11, KC_F4, KC_F5, KC_F6, KC_SCRL,                             XXXXXXX,   KC_TRNS,   KC_TRNS,   KC_TRNS,   KC_TRNS, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
          XXXXXXX, KC_F10  , KC_F1, KC_F2, KC_F3, KC_PAUS,                           XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
     // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
