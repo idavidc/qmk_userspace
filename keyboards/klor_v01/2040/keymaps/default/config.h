@@ -17,10 +17,6 @@ for more options.
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
 
-
-#define DYNAMIC_KEYMAP_LAYER_COUNT 10
-
-
 // Auto Shift
 #define NO_AUTO_SHIFT_ALPHA
 #define AUTO_SHIFT_TIMEOUT TAPPING_TERM

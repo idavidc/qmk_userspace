@@ -8,18 +8,15 @@ for more options.
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 
+
 //#define TAPPING_TERM 170
 #define TAPPING_TERM 170
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
-//#define IGNORE_MOD_TAP_INTERRUPT
+#define IGNORE_MOD_TAP_INTERRUPT
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
-
-
-#define DYNAMIC_KEYMAP_LAYER_COUNT 10
-
 
 // Auto Shift
 #define NO_AUTO_SHIFT_ALPHA
@@ -35,9 +32,16 @@ for more options.
 #define COMBO_COUNT 1
 
 
+#ifdef POINTING_DEVICE_ENABLE
+//#    define POINTING_DEVICE_ROTATION_90
+#    define SPLIT_POINTING_ENABLE
+#    define POINTING_DEVICE_RIGHT
+#    define POINTING_DEVICE_ROTATION_270
+#endif
+
 // RGB matrix support
 #ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_COLOR
+#    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effect
@@ -89,3 +93,5 @@ for more options.
 //#    define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #    define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
+
+
