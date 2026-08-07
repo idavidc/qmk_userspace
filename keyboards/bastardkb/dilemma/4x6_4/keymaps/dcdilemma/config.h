@@ -26,3 +26,7 @@
 #define TAPPING_TERM_PER_KEY
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 5000
+
+#define HOLD_ON_OTHER_KEY_PRESS
+#define PERMISSIVE_HOLD
+#define QUICK_TAP_TERM 0
