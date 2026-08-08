@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "achordion.h"
 
 enum dilemma_keymap_layers { LAYER_BASE = 0, LAYER_NAV, LAYER_POINTER, SYM, FUN, MOUSE, MEDIA, NUM};
 
@@ -26,6 +27,8 @@ uint16_t alt_tab_timer           = 0;
 
 
 void matrix_scan_user(void) {
+    achordion_task(); // Required for Achordion timeout tracking
+
     if (is_alt_tab_active) {
         if (timer_elapsed(alt_tab_timer) > 1000) {
             unregister_code(KC_LALT);
@@ -34,7 +37,8 @@ void matrix_scan_user(void) {
             is_alt_shift_tab_active = false;
         }
     }
-};
+}
+
 
 // Enablng debug
 
@@ -597,8 +601,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     dprintf("process --> KL: kc: 0x%04X, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
+
+  // Required for Achordion to intercept and process your home row mods
+  if (!achordion_process_record(keycode, record)) {
+      return false;
+  }
+
   return true;
-};
+}
+
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
