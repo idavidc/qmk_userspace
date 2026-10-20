@@ -144,11 +144,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────────────────────╮
        KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
-       RGB_MOD, TD(TD_MAC_HOME), XXXXXXX, TD(TD_MAC_END), XXXXXXX, EE_CLR,       XXXXXXX,   KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
+       RGB_MATRIX_STEP_MOD, TD(TD_MAC_HOME), XXXXXXX, TD(TD_MAC_END), XXXXXXX, EE_CLR,       XXXXXXX,   KC_HOME,   KC_UP,  KC_END, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
        RGB_TOG, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, KC_P,    KC_PPLS, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────┤
-      RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
+      RGB_MATRIX_STEP_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DF(LAYER_BASE),    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────────────────────╯
                   XXXXXXX, _______, TD(TD_CTL_GUI), _______,                    QK_MAGIC_SWAP_LCTL_LGUI, _______, QK_MAGIC_UNSWAP_LCTL_LGUI, XXXXXXX
   //                    ╰───────────────────────────────────────────────────╯ ╰───────────────────────────────────────────────────╯
