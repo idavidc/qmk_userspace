@@ -283,16 +283,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 break;
             case LAYER_NAV: // Mouse wheel U/D
                 if (clockwise) {
-                    tap_code(MS_U);
+                    tap_code(MS_UP);
                 } else {
-                    tap_code(MS_D);
+                    tap_code(MS_DOWN);
                 }
                 break;
             case MOUSE: // Underglow brightness
                 if (clockwise) {
-                    tap_code(MS_U);
+                    tap_code(MS_UP);
                 } else {
-                    tap_code(MS_D);
+                    tap_code(MS_DOWN);
                 }
                 break;
             default: // No action
