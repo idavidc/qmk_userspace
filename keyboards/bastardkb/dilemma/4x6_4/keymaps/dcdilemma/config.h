@@ -22,7 +22,7 @@
 #define SPLIT_LED_STATE_ENABLE
 #define CIRQUE_PINNACLE_TAP_ENABLE
 /* Was 170*/
-#define TAPPING_TERM 180
+#define TAPPING_TERM 220
 #define TAPPING_TERM_PER_KEY
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 5000
@@ -30,3 +30,5 @@
 #define HOLD_ON_OTHER_KEY_PRESS
 #define PERMISSIVE_HOLD
 #define QUICK_TAP_TERM 0
+
+#undef HOLD_ON_OTHER_KEY_PRESS
