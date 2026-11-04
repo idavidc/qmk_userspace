@@ -40,6 +40,16 @@ void matrix_scan_user(void) {
 }
 
 
+// Combos
+
+const uint16_t PROGMEM test_combo1[] = {KC_A, KC_S, COMBO_END};
+const uint16_t PROGMEM test_combo2[] = {KC_C, KC_D, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(test_combo1, KC_LGUI),
+    COMBO(test_combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
+};
+
+
 // Enablng debug
 
 void keyboard_post_init_user(void) {
